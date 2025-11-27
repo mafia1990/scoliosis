@@ -1,0 +1,81 @@
+/* styles/Home.module.css */
+.container {
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  /* background-image: url("/images/bg.webp"); */
+  /* padding: 20px 0; */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mainTitle {
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 2.5rem;
+  color: hsl(35, 45%, 30%);
+  text-shadow: 2px 2px 0px hsl(35, 55%, 90%);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  text-align: center;
+  color: hsl(35, 30%, 40%);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+.object1{
+z-index: 1;
+    aspect-ratio: 1;
+    background-image: url(/images/x.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: auto;
+    height: 64%;
+    position: fixed;
+    bottom: 0vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    
+    max-width: 100vw;
+}
+.object2{
+aspect-ratio: 1;
+    z-index: 9999;
+    background-image: url(/images/xx.webp);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: auto;
+    height: 14vh;
+    position: fixed;
+    top: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+@media screen and (min-width: 1024px) {
+  .object1{
+     height: 14vh;
+}
+}
+@media screen and (max-width: 600px) {
+  .ImageBook{
+    margin: 0vh;
+  }
+  .object1{
+    height: unset;
+}
+ .object2{
+z-index: 9999;
+    height: 7vh;
+}
+}
