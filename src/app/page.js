@@ -2,8 +2,6 @@
 import Head from 'next/head';
 // import BookFlip from '../components/BookFlip';
 import styles from '../styles/Home.module.css';
-import SinglePageBook from '@/components/SinglePageBook';
-import StyledBook from '@/components/StyledBook';
 import BookFlip from '@/components/BookFlip';
 
 export default function Home() {

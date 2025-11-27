@@ -104,9 +104,7 @@ const BookFlip = () => {
                 </button>
               </div>
               
-              <div className={styles.pageNumber}>
-                {index + 1}
-              </div>
+             
             </div>
           </div>
         ))}
