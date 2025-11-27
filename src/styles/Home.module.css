@@ -31,7 +31,7 @@
   font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 .object1{
-z-index: 9999;
+z-index: 1;
     aspect-ratio: 1;
     background-image: url(/images/x.png);
     background-position: bottom;
