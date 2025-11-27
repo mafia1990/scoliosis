@@ -1,153 +1,44 @@
 "use client"
 // components/BookFlip.js
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
+// import styles from './BookFlip.module.css';
+// import Image from 'next/image';
 import styles from './ImageBook.module.css';
 
 const BookFlip = () => {
-  const bookRef = useRef(null);
-  const [currentPage, setCurrentPage] = useState(0);
+   const bookRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState();
   const [h, setH] = useState(600);
   const [w, setW] = useState(700);
+// در صفحه اصلی
+useEffect(() => {
+  // غیرفعال کردن اسکرول در سطح document
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
   
-  // حالت‌های زوم
-  const [scale, setScale] = useState(1);
-  const [isZooming, setIsZooming] = useState(false);
-  const [lastTouchDistance, setLastTouchDistance] = useState(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [startTouches, setStartTouches] = useState([]);
-
-  // غیرفعال کردن اسکرول
-  useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    
-    return () => {
-      document.documentElement.style.overflow = 'auto';
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
-  // تنظیم ارتفاع
-  useEffect(() => {
-    if (!bookRef.current) return;
-
-    const interval = setInterval(() => {
-      if (!bookRef.current?.pageFlip) return;
-
-      const api = bookRef.current.pageFlip();
-      if (!api) return;
-      const realHeight = api.getSettings().height;
-      
-      if (realHeight) {
-        if (document.body.clientWidth < 600) {
-          setW(document.body.clientWidth);
-        }
-        
-        setH(document.body.clientHeight);
-        clearInterval(interval);
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [bookRef]);
-
-  // محاسبه فاصله بین دو نقطه تاچ
-  const getTouchDistance = useCallback((touches) => {
-    if (touches.length < 2) return 0;
-    const touch1 = touches[0];
-    const touch2 = touches[1];
-    return Math.sqrt(
-      Math.pow(touch2.clientX - touch1.clientX, 2) +
-      Math.pow(touch2.clientY - touch1.clientY, 2)
-    );
-  }, []);
-
-  // هندلر شروع تاچ
-  const handleTouchStart = useCallback((e) => {
-    if (e.touches.length === 2) {
-      setIsZooming(true);
-      setLastTouchDistance(getTouchDistance(e.touches));
-      setStartTouches([...e.touches]);
-      e.preventDefault();
-    }
-  }, [getTouchDistance]);
-
-  // هندلر حرکت تاچ
-  const handleTouchMove = useCallback((e) => {
-    if (e.touches.length === 2 && isZooming) {
-      const touchDistance = getTouchDistance(e.touches);
-      
-      if (lastTouchDistance !== null) {
-        const scaleChange = touchDistance / lastTouchDistance;
-        const newScale = Math.max(0.5, Math.min(3, scale * scaleChange));
-        setScale(newScale);
-      }
-      
-      setLastTouchDistance(touchDistance);
-      e.preventDefault();
-    }
-  }, [isZooming, lastTouchDistance, scale, getTouchDistance]);
-
-  // هندلر پایان تاچ
-  const handleTouchEnd = useCallback((e) => {
-    if (e.touches.length < 2) {
-      setIsZooming(false);
-      setLastTouchDistance(null);
-      
-      // ریست کردن موقعیت اگر زوم 1 باشد
-      if (scale === 1) {
-        setPosition({ x: 0, y: 0 });
-      }
-    }
-  }, [scale]);
-
-  // هندلر دابل کلیک برای زوم
-  const handleDoubleClick = useCallback((e) => {
-    e.preventDefault();
-    if (scale === 1) {
-      setScale(2);
-      // مرکز کردن موقعیت روی نقطه کلیک
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = (rect.width / 2 - (e.clientX - rect.left)) / 2;
-      const y = (rect.height / 2 - (e.clientY - rect.top)) / 2;
-      setPosition({ x, y });
-    } else {
-      setScale(1);
-      setPosition({ x: 0, y: 0 });
-    }
-  }, [scale]);
-
-  // ریست کردن زوم
-  const resetZoom = useCallback(() => {
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-  }, []);
-
-  // استایل داینامیک برای زوم
-  const zoomStyle = {
-    transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-    transformOrigin: 'center center',
-    transition: isZooming ? 'none' : 'transform 0.3s ease',
-    width: '100%',
-    height: '100%',
-    touchAction: 'none'
+  return () => {
+    // برگردوندن اسکرول هنگام unmount
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
   };
-
+}, []);
+  // آرایه عکس‌ها - می‌تونید آدرس عکس‌های خودتون رو قرار بدید
   const imagePages = [
     {
       id: 1,
-      image: '/images/1.png',
+      // type: 'cover',
+      image: '/images/1.png', // جایگزین کنید با آدرس عکس واقعی
       title: 'Scoliosis Sisterhood'
     },
     {
       id: 2,
-      image: '/images/44.webp',
+      image: '/images/44.webp', // جایگزین کنید با آدرس عکس واقعی
       title: 'Scoliosis Sisterhood'
     },
     {
       id: 3,
-      image: '/images/3.webp',
+      image: '/images/3.webp', // جایگزین کنید با آدرس عکس واقعی
       title: 'Scoliosis Sisterhood'
     },
     {
@@ -165,56 +56,69 @@ const BookFlip = () => {
       image: '/images/6.png',
       title: 'Scoliosis Sisterhood'
     },
-    {
+  {
       id: 7,
       image: '/images/7.webp',
       title: 'Scoliosis Sisterhood'
     },
-    {
+ 
+     {
       id: 8,
       image: '/images/8.webp',
       title: 'Scoliosis Sisterhood'
     },
-    {
+  {
       id: 9,
       image: '/images/9.webp',
       title: 'Scoliosis Sisterhood'
     },
-    {
+  {
       id: 10,
       image: '/images/10.webp',
       title: 'Scoliosis Sisterhood'
     },
-    {
+  {
       id: 11,
       image: '/images/11.webp',
       title: 'Scoliosis Sisterhood'
     },
-    {
+  {
       id: 12,
       image: '/images/12.webp',
       title: 'Scoliosis Sisterhood'
     },
+ 
   ];
+useEffect(() => {
+  if (!bookRef.current) return;
 
+  const interval = setInterval(() => {
+    if (!bookRef.current?.pageFlip) return;
+
+    const api = bookRef.current.pageFlip();
+    if (!api) return;
+    const realHeight = api.getSettings().height;
+  console.log(document.body.clientWidth )
+    if (realHeight) {
+       const img = document.body;
+      if(document.body.clientWidth < 600){
+        setW(document.body.clientWidth);
+      }
+      
+      setH(img.clientHeight);
+      clearInterval(interval);
+    }
+  }, 50);
+
+  return () => clearInterval(interval);
+}, [bookRef]);
   return (
     <div className={styles.bookContainer}>
-      {/* دکمه ریست زوم */}
-      {scale !== 1 && (
-        <button 
-          className={styles.zoomResetButton}
-          onClick={resetZoom}
-          title="Reset Zoom"
-        >
-          ↺
-        </button>
-      )}
-      
       <HTMLFlipBook
         key={h}  
         ref={bookRef}
-        width={w}
-        height={h}
+        width={w} // عرض ثابت برای کتاب
+        height={h} // ارتفاع ثابت برای کتاب
         size="stretch"
         minWidth={300}
         maxWidth={800}
@@ -233,37 +137,70 @@ const BookFlip = () => {
         swipeDistance={30}
         showPageCorners={false}
         disableFlipByClick={false}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
-        {imagePages.map((page, index) => (
+       {imagePages.map((page, index) => (
           <div  
             key={page.id} 
             className={`${styles.page} ${styles.realPage}`}
             data-page-number={index + 1}
           >
             <div className={styles.pageContent}>
-              <div 
-                className={styles.imageContainer}
-                onDoubleClick={handleDoubleClick}
-                style={zoomStyle}
-              >
-                <img 
-                  id={`page-image-${index + 1}`}
+              <div className={styles.imageContainer}>
+                <img id={`page-image-${index + 1}`}
                   src={page.image} 
-                  alt={page.title}
+                  alt={page.alt}
                   className={styles.responsiveImage}
                 />
               </div>
               
+              {/* شماره صفحه */}
               <div className={styles.pageNumber}>
                 {index + 1}
               </div>
+              
+              {/* افکت لبه ورق خورده */}
             </div>
           </div>
         ))}
       </HTMLFlipBook>
+      
+      {/* <div className={styles.controls}>
+        <button 
+          className={styles.navButton}
+          onClick={() => {
+            if (bookRef.current?.pageFlip) {
+              bookRef.current.pageFlip().flipPrev();
+            }
+          }}
+        >
+          ◀ Back
+        </button>
+        
+        <div className={styles.pageIndicator}>
+          {imagePages.map((_, index) => (
+            <button
+              key={index}
+              className={styles.pageDot}
+              onClick={() => {
+                if (bookRef.current?.pageFlip) {
+                  bookRef.current.pageFlip().flip(index);
+                }
+              }}
+            />
+          ))}
+        </div>
+
+        <button 
+          className={styles.navButton}
+          onClick={() => {
+            if (bookRef.current?.pageFlip) {
+              bookRef.current.pageFlip().flipNext();
+            }
+          }}
+        >
+          Next ▶
+        </button>
+      </div> */}
     </div>
   );
 };
