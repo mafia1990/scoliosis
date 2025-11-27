@@ -64,7 +64,7 @@ aspect-ratio: 1;
 }
 @media screen and (min-width: 1024px) {
   .object1{
-     height: 14vh;
+     height: 40vh;
 }
 }
 @media screen and (max-width: 600px) {
