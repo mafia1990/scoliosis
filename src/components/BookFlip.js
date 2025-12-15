@@ -41,18 +41,18 @@ const BookFlip = () => {
   }, [bookRef]);
 
   const imagePages = [
-    { id: 1, image: '/images/1.png', title: 'Scoliosis Sisterhood' },
+    { id: 1, image: '/images/1-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 2, image: '/images/44.webp', title: 'Scoliosis Sisterhood' },
     { id: 3, image: '/images/3.webp', title: 'Scoliosis Sisterhood' },
     { id: 4, image: '/images/45.jpg', title: 'Scoliosis Sisterhood' },
     { id: 5, image: '/images/5.webp', title: 'Scoliosis Sisterhood' },
-    { id: 6, image: '/images/6.png', title: 'Scoliosis Sisterhood' },
-    { id: 7, image: '/images/7.webp', title: 'Scoliosis Sisterhood' },
-    { id: 8, image: '/images/8.webp', title: 'Scoliosis Sisterhood' },
+    { id: 6, image: '/images/6.webp', title: 'Scoliosis Sisterhood' },
+    { id: 7, image: '/images/7-2.webp', title: 'Scoliosis Sisterhood' },
+    { id: 8, image: '/images/8-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 9, image: '/images/9.webp', title: 'Scoliosis Sisterhood' },
-    { id: 10, image: '/images/10.webp', title: 'Scoliosis Sisterhood' },
+    { id: 10, image: '/images/10-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 11, image: '/images/11.webp', title: 'Scoliosis Sisterhood' },
-    { id: 12, image: '/images/12.webp', title: 'Scoliosis Sisterhood' },
+    { id: 12, image: '/images/12-2.webp', title: 'Scoliosis Sisterhood' },
   ];
 
   return (
