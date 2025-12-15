@@ -43,7 +43,7 @@ const BookFlip = () => {
   const imagePages = [
     { id: 1, image: '/images/1-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 2, image: '/images/44.webp', title: 'Scoliosis Sisterhood' },
-    { id: 3, image: '/images/3.webp', title: 'Scoliosis Sisterhood' },
+    { id: 3, image: '/images/3-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 4, image: '/images/45.jpg', title: 'Scoliosis Sisterhood' },
     { id: 5, image: '/images/5-2.webp', title: 'Scoliosis Sisterhood' },
     { id: 6, image: '/images/6.webp', title: 'Scoliosis Sisterhood' },
